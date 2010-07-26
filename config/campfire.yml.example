@@ -2,8 +2,10 @@ production:
   subdomain:  campfire_subdomain
   token:      campfire_token
   room:       campfire_roomname
+  projects:   project1,project2
 
 development:
   subdomain:  campfire_subdomain
   token:      campfire_token
   room:       campfire_roomname
+  projects:   project1,project2

@@ -12,7 +12,6 @@ class NotifierHook < Redmine::Hook::Listener
     @@token     = options[Rails.env]['token']
     @@room      = options[Rails.env]['room']
     @@projects  = options[Rails.env]['projects'].split(/\s*,\s*/)
-    RAILS_DEFAULT_LOGGER.warn(options.inspect)
   end
 
   def controller_issues_new_after_save(context = { })
@@ -50,8 +49,6 @@ class NotifierHook < Redmine::Hook::Listener
 private
   def speak(message,project=nil)
     NotifierHook.load_options unless @@subdomain && @@token && @@room
-    RAILS_DEFAULT_LOGGER.error "Projects: #{@@projects.inspect}"
-    RAILS_DEFAULT_LOGGER.error "#{project}: #{message}"
     return true unless @@projects.include? project.identifier
     begin
       campfire = Tinder::Campfire.new @@subdomain, :token => @@token
